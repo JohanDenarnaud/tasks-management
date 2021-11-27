@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>Application Web Johan</title>
+<link rel="stylesheet" type="text/css" href="webjars/bootstrap/css/bootstrap.min.css"/>
+</head>
+<body>
+	<div class="container text-center">
+		<div>
+			<h1>Bienvenue dans mon application</h1>
+		</div>
+		<div>
+			<h3><a th:href="@{/liste_utilisateurs}">Liste des utilisateurs</a></h3>
+			<h3><a th:href="@{/liste_taches}">Liste des tâches</a></h3>
+			<h3><a th:href="@{/inscription}">Inscription</a></h3>
+			<h3><a th:href="@{/login}">Login</a></h3>
+			
+		</div>
+	</div>
+	
+</body>
+</html>
