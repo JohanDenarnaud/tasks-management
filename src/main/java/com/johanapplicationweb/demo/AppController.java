@@ -1,6 +1,7 @@
 package com.johanapplicationweb.demo;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.origin.SystemEnvironmentOrigin;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -58,6 +59,8 @@ public class AppController {
 		HttpSession session = request.getSession();
 		Long idUserLong = (Long) session.getAttribute("userId");
  		List<Task> listTasks = repoTask.findUserTasksById(idUserLong);
+ 		System.out.println(listTasks);
+ 		
 		model.addAttribute("listTasks", listTasks);
 		return "user_tasks";
 	}

@@ -44,7 +44,7 @@
 								<div class="ui-dropdown-content" th:text="${task.description}">Lorem ipsum dropdown content</div>
 							</div>
 						</td>
-						<td th:text="${task.category}">Categorie A</td>
+						<td th:each="cat: ${task.category}"><p th:text="${cat.title}">Categorie A</p></td>
 						<td th:text="${#dates.format(task.createDate, 'dd/MM/yyyy')}">02/02/2021</td>
 						<td>
 							<form th:action="@{/deleteTask}" method="post"> 

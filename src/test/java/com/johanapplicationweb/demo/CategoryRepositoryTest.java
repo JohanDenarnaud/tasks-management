@@ -24,7 +24,7 @@ public class CategoryRepositoryTest {
 	@Test
 	public void testCreateTask() {
 		Category category = new Category();
-		category.setTitle("Jardin");
+		category.setTitle("Maison");
 		category.setId_user(3L);
 		
 		Category savedCategory = repo.save(category);

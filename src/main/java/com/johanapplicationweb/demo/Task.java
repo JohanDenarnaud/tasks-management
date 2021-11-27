@@ -3,13 +3,14 @@ package com.johanapplicationweb.demo;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
-import java.util.Locale.Category;
+
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -29,22 +30,13 @@ public class Task {
 	@Column(nullable = false, length = 300)
 	private Date createDate =  new Date();	
 	
-
-	@Column(nullable = false, length = 100)
-	private String category;
-		
-	
 	@Column(nullable = false)
 	private Long id_user;
-
-	public String getCategory() {
-		return category;
-	}
-
-	public void setCategory(String category) {
-		this.category = category;
-	}
-
+	
+	@ManyToOne
+	private Category category;
+	
+	
 	public Long getId() {
 		return id;
 	}
@@ -81,13 +73,16 @@ public class Task {
 		return createDate;
 	}
 
-//	public Date getDueDate() {
-//		return dueDate;
-//	}
-//
-//	public void setDueDate(Date dueDate) {
-//		this.dueDate = dueDate;
-//	}
+	public Category getCategory() {
+		return category;
+	}
 
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+
+	
+	
+	
 	
 }

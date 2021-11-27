@@ -2,6 +2,8 @@ package com.johanapplicationweb.demo;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.Optional;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -19,17 +21,23 @@ public class TaskRepositoryTest {
 	private TaskRepository repo;
 	
 	@Autowired
+	private CategoryRepository repoCat;
+	
+	@Autowired
 	private TestEntityManager entityManager;
 	
 	@Test
 	public void testCreateTask() {
+		
+		Category category = repoCat.findCategoryById(1L);
+		
+				
 		Task task = new Task();
 		task.setTitle("Faire la vaisselle");
 		task.setDescription("Faire la vaisselle");
 		task.setId_user(3L);
-		task.setCategory("Jardin");
-		
-		
+		task.setCategory(category);
+				
 		Task savedTask = repo.save(task);
 		
 		Task existTask = entityManager.find(Task.class, savedTask.getId());
