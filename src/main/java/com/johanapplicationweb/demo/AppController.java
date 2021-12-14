@@ -20,6 +20,9 @@ public class AppController {
 	private UserRepository repo;
 	
 	@Autowired
+	private CategoryRepository repoCat;
+	
+	@Autowired
 	private TaskRepository repoTask;
 	
 	@Autowired
@@ -76,7 +79,20 @@ public class AppController {
 	@PostMapping("/save_task")
 	public String saveTask(Model model, Task task) {
 		HttpSession session = request.getSession();
-		task.setId_user((Long)session.getAttribute("userId"));
+		Long userId = (Long)session.getAttribute("userId");
+		task.setId_user(userId);
+		
+		Category category = new Category();
+		if ( request.getParameter("newCategory") != null && !request.getParameter("newCategory").isEmpty()) {
+			category.setId_user(userId);
+			category.setTitle(request.getParameter("newCategory"));
+			repoCat.save(category);
+			category = repoCat.findCategoryByTitle(request.getParameter("newCategory"), userId);
+		} else {
+			category = repoCat.findCategoryById(Long.parseLong(request.getParameter("idCategory")));
+		}
+		
+		task.setCategory(category);		
 		repoTask.save(task);
 		viewUserTasks(model, request);
 		return "user_tasks";
@@ -95,6 +111,10 @@ public class AppController {
 	@GetMapping("/ajout_tache")
 	public String showAddTaskForm(Model model) {
 		model.addAttribute("task", new Task());
+		HttpSession session = request.getSession();
+		Long userId = (Long) session.getAttribute("userId");
+		List<Category> listCategoriesUser = repoCat.findAllCategoryByIdUser(userId);
+		model.addAttribute("listCategoriesUser", listCategoriesUser);
 		return "add_task";
 	}
 	

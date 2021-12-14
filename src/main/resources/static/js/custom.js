@@ -4,4 +4,12 @@ $(document).ready(function() {
 		content  : '.ui-dropdown-content',
 		autoclose: true
 	});
+	
+	
+	$('.addNewCat').on("click", function(){
+		$('.inputNewCat').toggle();
+		$('.catList').toggle();
+		
+	});
 });
+

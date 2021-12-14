@@ -18,3 +18,18 @@
 .active > .ui-dropdown-content {
 	display:block; 
 }	
+
+.inputNewCat {
+	display : none;
+}
+.addNewCat {
+	cursor: pointer;
+}
+
+.inputNewCat div  {
+	display : flex;
+	float : left;
+}
+.inputNewCat label {
+	float : left;	
+}
